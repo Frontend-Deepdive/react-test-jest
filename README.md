@@ -14,6 +14,9 @@
 - `LoginPage.tsx`: 로그인 로직을 처리하는 페이지 컴포넌트
 - `__tests__`: Jest + Testing Library 기반 테스트 코드 작성 폴더
 
+- 로그인 페이지에서 admin@naver.com과 password를 각각 입력하면 성공
+- 그외는 로그인 실패
+
 # 미션 요구사항
 
 1. 구현된 로그인 페이지의 컴포넌트 구조와 동작 방식을 이해한다
