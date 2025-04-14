@@ -1,21 +1,42 @@
-import LoginForm from "./components/LoginForm";
-import { login } from "./api/auth";
+import normalize from "emotion-normalize";
+import "./App.css";
+import { css, Global } from "@emotion/react";
+import { PageLayout } from "./pages/PageLayout";
+import { router } from "./pages/Routes";
+import { RecoilRoot } from "recoil";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider } from "react-router-dom";
+import { OrderProvider } from "./libs/order";
 
-function App() {
-  const handleLogin = async (username: string, password: string) => {
-    try {
-      const response = await login(username, password);
-      alert(`Login successful: ${response.message}`);
-    } catch (error) {
-      alert("Login failed");
-    }
-  };
+const queryClient = new QueryClient();
 
+export default function App() {
   return (
-    <div>
-      <LoginForm onLogin={handleLogin} />
-    </div>
+    <>
+      <Global
+        styles={css`
+          ${normalize}
+          h1, h2, h3, h4, h5, h6, input {
+            margin: 0;
+          }
+
+          button,
+          input {
+            background: none;
+            border: none;
+            outline: none;
+          }
+        `}
+      />
+      <PageLayout>
+        <QueryClientProvider client={queryClient}>
+          <RecoilRoot>
+            <OrderProvider>
+              <RouterProvider router={router} />
+            </OrderProvider>
+          </RecoilRoot>
+        </QueryClientProvider>
+      </PageLayout>
+    </>
   );
 }
-
-export default App;
