@@ -21,7 +21,16 @@ export const LoggedIn: Story = {
     user: {
       name: 'Jane Doe',
     },
+    onLogin: () => console.log('Logged in'),
+    onLogout: () => console.log('Logged out'),
+    onCreateAccount: () => console.log('Account created'),
   },
 };
 
-export const LoggedOut: Story = {};
+export const LoggedOut: Story = {
+  args: {
+    onLogin: () => console.log('Logged in'),
+    onLogout: () => console.log('Logged out'),
+    onCreateAccount: () => console.log('Account created'),
+  },
+};

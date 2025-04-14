@@ -1,12 +1,12 @@
-import normalize from "emotion-normalize";
-import "./App.css";
-import { css, Global } from "@emotion/react";
-import { PageLayout } from "./pages/PageLayout";
-import { router } from "./pages/Routes";
-import { RecoilRoot } from "recoil";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RouterProvider } from "react-router-dom";
-import { OrderProvider } from "./libs/order";
+import normalize from 'emotion-normalize';
+import './App.css';
+import { css, Global } from '@emotion/react';
+import { PageLayout } from './pages/PageLayout';
+import { router } from './pages/Routes';
+import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from 'react-router-dom';
+import { OrderProvider } from './libs/order';
 
 const queryClient = new QueryClient();
 

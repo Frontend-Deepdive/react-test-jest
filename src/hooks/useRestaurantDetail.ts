@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
-import axiosClient from "../libs/axios";
-import { IMenu } from "../mixins/types";
+import { useQuery } from '@tanstack/react-query';
+import axiosClient from '../libs/axios';
+import { IMenu } from '../mixins/types';
 
 interface IRestaurantDetail {
   id: number;
@@ -11,18 +11,16 @@ interface IRestaurantDetail {
 
 const useRestaurantDetail = (restaurantId: number) => {
   return useQuery(
-    ["restaurantDetail"],
+    ['restaurantDetail'],
     async () => {
-      const { data } = await axiosClient.get<IRestaurantDetail>(
-        `/restaurant/${restaurantId}`
-      );
+      const { data } = await axiosClient.get<IRestaurantDetail>(`/restaurant/${restaurantId}`);
       return data;
     },
     {
       cacheTime: 0,
       staleTime: 0,
       enabled: restaurantId > 0,
-    }
+    },
   );
 };
 

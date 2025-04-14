@@ -1,13 +1,13 @@
-import { INewOrder, ITargetRestaurant } from "libs/order";
-import { atom, selector } from "recoil";
+import { INewOrder, ITargetRestaurant } from '../libs/order';
+import { atom, selector } from 'recoil';
 
 export const newOrderState = atom<INewOrder[]>({
-  key: "newOrderState",
+  key: 'newOrderState',
   default: [],
 });
 
 export const totalPriceState = selector({
-  key: "totalPriceState",
+  key: 'totalPriceState',
   get: ({ get }) => {
     const items = get(newOrderState); // your atom containing the list of objects
 
@@ -16,9 +16,9 @@ export const totalPriceState = selector({
 });
 
 export const targetRestaurantState = atom<ITargetRestaurant>({
-  key: "targetRestaurantState",
+  key: 'targetRestaurantState',
   default: {
     id: 0,
-    name: "",
+    name: '',
   },
 });

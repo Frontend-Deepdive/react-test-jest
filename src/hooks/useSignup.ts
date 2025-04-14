@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
-import axiosClient from "../libs/axios";
+import { useMutation } from '@tanstack/react-query';
+import axiosClient from '../libs/axios';
 
 export interface SignupProps {
   username: string;
@@ -7,7 +7,7 @@ export interface SignupProps {
 }
 
 const postSignup = async ({ username, password }: SignupProps) => {
-  const { data } = await axiosClient.post("/user/signup/", {
+  const { data } = await axiosClient.post('/user/signup/', {
     email: username,
     password,
   });
@@ -16,14 +16,10 @@ const postSignup = async ({ username, password }: SignupProps) => {
 };
 
 const useSignup = () =>
-  useMutation(
-    ["signUp"],
-    async (SignupInfo: SignupProps) => postSignup(SignupInfo),
-    {
-      onError() {
-        throw Error("Signup failed");
-      },
-    }
-  );
+  useMutation(['signUp'], async (SignupInfo: SignupProps) => postSignup(SignupInfo), {
+    onError() {
+      throw Error('Signup failed');
+    },
+  });
 
 export default useSignup;

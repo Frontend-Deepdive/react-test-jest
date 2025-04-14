@@ -1,4 +1,4 @@
-import { INewOrder, IRestaurant, ITargetRestaurant } from ".";
+import { INewOrder, IRestaurant, ITargetRestaurant } from '.';
 
 export type State = {
   newOrder: INewOrder[];
@@ -13,6 +13,6 @@ export const initialState: State = {
   restaurantList: [],
   restaurant: {
     id: 0,
-    name: "",
+    name: '',
   },
 };

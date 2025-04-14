@@ -1,11 +1,11 @@
-import { ReactNode, useEffect, useReducer } from "react";
+import { ReactNode, useEffect, useReducer } from 'react';
 
-import OrderContext, { initialContext } from "./context";
-import type { ContextType } from "./context";
-import { reducer } from "./reducer";
-import { initialState } from "./state";
-import { INewOrder, IRestaurant, ITargetRestaurant } from ".";
-import axiosClient from "../../axios";
+import OrderContext, { initialContext } from './context';
+import type { ContextType } from './context';
+import { reducer } from './reducer';
+import { initialState } from './state';
+import { INewOrder, IRestaurant, ITargetRestaurant } from '.';
+import axiosClient from '../../axios';
 
 const OrderProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -16,35 +16,33 @@ const OrderProvider = ({ children }: { children: ReactNode }) => {
       return total + item.count * item.price;
     }, 0);
 
-    dispatch({ type: "SET_TOTAL_PRICE", payload: totalPrice });
+    dispatch({ type: 'SET_TOTAL_PRICE', payload: totalPrice });
   }, [newOrder]);
 
   const resetOrder = () => {
-    dispatch({ type: "RESET_ORDER" });
+    dispatch({ type: 'RESET_ORDER' });
   };
 
   const addItemToOrder = (newOrder: INewOrder) => {
-    dispatch({ type: "ADD_ITEM_TO_ORDER", payload: newOrder });
+    dispatch({ type: 'ADD_ITEM_TO_ORDER', payload: newOrder });
   };
 
   const increaseItemCount = (menuId: number) => {
-    console.log("menuId: ", menuId);
-    dispatch({ type: "INCREASE_ITEM_COUNT", payload: menuId });
+    console.log('menuId: ', menuId);
+    dispatch({ type: 'INCREASE_ITEM_COUNT', payload: menuId });
   };
 
   const decreaseItemCount = (menuId: number) => {
-    dispatch({ type: "DECREASE_ITEM_COUNT", payload: menuId });
+    dispatch({ type: 'DECREASE_ITEM_COUNT', payload: menuId });
   };
 
   const setRestaurant = (targetRestaurant: ITargetRestaurant) => {
-    dispatch({ type: "SET_TARGET_RESTAURANT", payload: targetRestaurant });
+    dispatch({ type: 'SET_TARGET_RESTAURANT', payload: targetRestaurant });
   };
 
   const getRestaurantList = async (foodTypeId: number) => {
-    const { data } = await axiosClient.get<IRestaurant[]>(
-      `/restaurant/food-type/${foodTypeId}`
-    );
-    dispatch({ type: "SET_RESTAURANT_LIST", payload: data });
+    const { data } = await axiosClient.get<IRestaurant[]>(`/restaurant/food-type/${foodTypeId}`);
+    dispatch({ type: 'SET_RESTAURANT_LIST', payload: data });
   };
 
   const orderContext: ContextType = {
@@ -58,11 +56,7 @@ const OrderProvider = ({ children }: { children: ReactNode }) => {
     getRestaurantList,
   };
 
-  return (
-    <OrderContext.Provider value={orderContext}>
-      {children}
-    </OrderContext.Provider>
-  );
+  return <OrderContext.Provider value={orderContext}>{children}</OrderContext.Provider>;
 };
 
 export default OrderProvider;

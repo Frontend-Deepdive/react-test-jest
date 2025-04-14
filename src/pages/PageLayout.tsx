@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export function PageLayout({ children }: { children: ReactNode }) {
   return <Wrapper>{children}</Wrapper>;

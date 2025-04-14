@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { flexRow } from "mixins/styles";
+import styled from '@emotion/styled';
+import { flexRow } from '../mixins/styles';
 
 export default function Header() {
   return (

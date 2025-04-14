@@ -1,12 +1,12 @@
 // TODO: 'idle' state
 export type CallState =
-  | "dialing"
-  | "ringing"
-  | "established"
-  | "connected"
-  | "reconnecting"
-  | "reconnected"
-  | "ended";
+  | 'dialing'
+  | 'ringing'
+  | 'established'
+  | 'connected'
+  | 'reconnecting'
+  | 'reconnected'
+  | 'ended';
 
 export type AudioInputDeviceInfo = {
   current?: InputDeviceInfo;

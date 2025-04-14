@@ -1,7 +1,7 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
-import { State, initialState } from "./state";
-import { INewOrder, IRestaurant, ITargetRestaurant } from ".";
+import { State, initialState } from './state';
+import { INewOrder, IRestaurant, ITargetRestaurant } from '.';
 
 /** Context */
 export type ContextType = State & {
@@ -17,7 +17,7 @@ export type ContextType = State & {
 };
 
 const stub = (): never => {
-  throw new Error("You forgot to wrap your component in <OrderContext>.");
+  throw new Error('You forgot to wrap your component in <OrderContext>.');
 };
 
 export const initialContext: ContextType = {
@@ -33,7 +33,7 @@ export const initialContext: ContextType = {
   totalPrice: 0,
   restaurant: {
     id: 0,
-    name: "",
+    name: '',
   },
   restaurantList: [],
 };

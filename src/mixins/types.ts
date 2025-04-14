@@ -1,4 +1,4 @@
-export type OrderCategory = "delivery" | "pickup";
+export type OrderCategory = 'delivery' | 'pickup';
 export interface IMenu {
   id: number;
   name: string;

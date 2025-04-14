@@ -1,13 +1,9 @@
-import styled from "@emotion/styled";
-import {
-  newOrderState,
-  targetRestaurantState,
-  totalPriceState,
-} from "../atoms/order";
-import { flexColumn, flexRow } from "../mixins/styles";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import styled from '@emotion/styled';
+import { newOrderState, targetRestaurantState, totalPriceState } from '../atoms/order';
+import { flexColumn, flexRow } from '../mixins/styles';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export default function OrderDetailPage() {
   const navigate = useNavigate();
@@ -26,23 +22,19 @@ export default function OrderDetailPage() {
   };
 
   const handleConfirmBtnClick = () => {
-    alert("주문이 완료되었습니다");
-    navigate("/");
+    alert('주문이 완료되었습니다');
+    navigate('/');
   };
 
   const handleIncrementBtnClick = (menuId: number) => {
     changeCount((oldArray) =>
-      oldArray.map((item) =>
-        item.id === menuId ? { ...item, count: item.count + 1 } : item
-      )
+      oldArray.map((item) => (item.id === menuId ? { ...item, count: item.count + 1 } : item)),
     );
   };
 
   const handleDecrementBtnClick = (menuId: number) => {
     changeCount((oldArray) =>
-      oldArray.map((item) =>
-        item.id === menuId ? { ...item, count: item.count - 1 } : item
-      )
+      oldArray.map((item) => (item.id === menuId ? { ...item, count: item.count - 1 } : item)),
     );
   };
 
@@ -57,17 +49,11 @@ export default function OrderDetailPage() {
             <MenuPrice>{`${menu.price.toLocaleString()}원`}</MenuPrice>
 
             <CounterSection data-cy="counter">
-              <DecrementBtn
-                data-cy="decrementBtn"
-                onClick={() => handleDecrementBtnClick(menu.id)}
-              >
+              <DecrementBtn data-cy="decrementBtn" onClick={() => handleDecrementBtnClick(menu.id)}>
                 -
               </DecrementBtn>
               {menu.count}
-              <IncrementBtn
-                data-cy="incrementBtn"
-                onClick={() => handleIncrementBtnClick(menu.id)}
-              >
+              <IncrementBtn data-cy="incrementBtn" onClick={() => handleIncrementBtnClick(menu.id)}>
                 +
               </IncrementBtn>
             </CounterSection>

@@ -8,7 +8,6 @@
   line-height: 1;
 }
 
-
 .storybook-button--primary {
   color: rgb(255, 255, 255);
   background-color: var(--primary);
@@ -19,7 +18,7 @@
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
 }
 
-.storybook-button:disabled{
+.storybook-button:disabled {
   background-color: var(--mono-100);
   color: var(--mono-200);
 }

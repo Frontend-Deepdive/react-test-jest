@@ -1,19 +1,19 @@
-import useLogin from "../hooks/useLogin";
-import { useEffect, useState } from "react";
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
-import React from "react";
+import useLogin from '../hooks/useLogin';
+import { useEffect, useState } from 'react';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const { mutate: handleLogin, isError, isSuccess } = useLogin();
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/");
+      navigate('/');
     }
   }, [isSuccess]);
 
@@ -23,10 +23,7 @@ export default function LoginPage() {
         <Header>
           <Title>이메일로 로그인</Title>
           <CloseButton>
-            <img
-              alt="close"
-              src={`https://kr.object.ncloudstorage.com/icons/ic-close-btn.svg`}
-            />
+            <img alt="close" src={`https://kr.object.ncloudstorage.com/icons/ic-close-btn.svg`} />
           </CloseButton>
         </Header>
         <InputSection>
@@ -37,9 +34,7 @@ export default function LoginPage() {
               data-cy="emailInput"
               type="text"
               placeholder="이메일을 입력해주세요"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             />
             {isError && <ErrorMessage>로그인 정보를 확인해주세요</ErrorMessage>}
           </InputWrapper>
@@ -50,15 +45,11 @@ export default function LoginPage() {
               data-cy="passwordInput"
               type="password"
               placeholder="비밀번호를 입력해주세요"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPassword(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             />
           </InputWrapper>
           {isError && (
-            <ErrorMessage data-testid="error-message">
-              로그인 정보를 확인해주세요
-            </ErrorMessage>
+            <ErrorMessage data-testid="error-message">로그인 정보를 확인해주세요</ErrorMessage>
           )}
         </InputSection>
       </div>
@@ -133,9 +124,8 @@ const LoginButton = styled.button`
   width: 100%;
   padding: 16px;
   border-radius: 4px;
-  background-color: ${(props) =>
-    props.disabled ? "var(--mono-100)" : "var(--primary)"};
-  color: ${(props) => (props.disabled ? "var(--mono-200)" : "var(--white)")};
+  background-color: ${(props) => (props.disabled ? 'var(--mono-100)' : 'var(--primary)')};
+  color: ${(props) => (props.disabled ? 'var(--mono-200)' : 'var(--white)')};
   margin-bottom: 24px;
 `;
 

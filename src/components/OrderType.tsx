@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { flexRow } from "../mixins/styles";
-import { OrderCategory } from "../mixins/types";
-import { MouseEventHandler } from "react";
+import styled from '@emotion/styled';
+import { flexRow } from '../mixins/styles';
+import { OrderCategory } from '../mixins/types';
+import { MouseEventHandler } from 'react';
 
 interface IOrderType {
   orderType: OrderCategory;
@@ -11,23 +11,14 @@ interface IOrderType {
 }
 
 const orderCategory = {
-  delivery: "배달",
-  pickup: "포장",
+  delivery: '배달',
+  pickup: '포장',
 };
 
-export default function OrderType({
-  orderType,
-  icon,
-  handleOrderTypeClick,
-  testId,
-}: IOrderType) {
+export default function OrderType({ orderType, icon, handleOrderTypeClick, testId }: IOrderType) {
   return (
     <OrderTypeBtn onClick={handleOrderTypeClick} data-cy={testId}>
-      <img
-        width={40}
-        height={40}
-        src={`https://kr.object.ncloudstorage.com/icons/${icon}`}
-      />
+      <img width={40} height={40} src={`https://kr.object.ncloudstorage.com/icons/${icon}`} />
       {orderCategory[orderType]}
     </OrderTypeBtn>
   );

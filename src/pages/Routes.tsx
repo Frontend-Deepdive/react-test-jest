@@ -1,17 +1,13 @@
-import {
-  Route,
-  createRoutesFromElements,
-  createBrowserRouter,
-} from "react-router-dom";
+import { Route, createRoutesFromElements, createBrowserRouter } from 'react-router-dom';
 
-import LoginPage from "./LoginPage";
+import LoginPage from './LoginPage';
 
-import FoodTypePage from "./FoodTypePage";
-import RestaurantListPage from "./RestaurantListPage";
-import RestaurantDetailPage from "./RestaurantDetailPage";
-import OrderDetailPage from "./OrderDetailPage";
-import SignupPage from "./SignupPage";
-import OrderTypePage from "./OrderTypePage";
+import FoodTypePage from './FoodTypePage';
+import RestaurantListPage from './RestaurantListPage';
+import RestaurantDetailPage from './RestaurantDetailPage';
+import OrderDetailPage from './OrderDetailPage';
+import SignupPage from './SignupPage';
+import OrderTypePage from './OrderTypePage';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +19,6 @@ export const router = createBrowserRouter(
       <Route path="/food-type/:id" element={<RestaurantListPage />} />
       <Route path="/restaurant/:id" element={<RestaurantDetailPage />} />
       <Route path="/order" element={<OrderDetailPage />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
