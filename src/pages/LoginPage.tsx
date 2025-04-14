@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 export default function LoginPage() {
   const navigate = useNavigate();

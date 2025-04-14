@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useReducer } from "react";
+import { ReactNode, useEffect, useReducer } from "react";
 
 import OrderContext, { initialContext } from "./context";
 import type { ContextType } from "./context";
@@ -7,11 +7,7 @@ import { initialState } from "./state";
 import { INewOrder, IRestaurant, ITargetRestaurant } from ".";
 import axiosClient from "../../axios";
 
-const OrderProvider = ({
-  children,
-}: {
-  children: ReactElement;
-}): JSX.Element => {
+const OrderProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { newOrder } = state;
 
