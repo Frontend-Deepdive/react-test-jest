@@ -9,9 +9,7 @@ const queryClient = new QueryClient({
 });
 
 describe('회원가입 테스트', () => {
-  //실패 케이스
-  test('비밀번호와 비밀번호 확인 값이 일치하지 않으면 에러메시지가 표시된다', async () => {
-    //given - 회원가입 페이지가 그려짐
+  beforeEach(() => {
     const routes = [
       {
         path: '/signup',
@@ -29,6 +27,10 @@ describe('회원가입 테스트', () => {
         <RouterProvider router={router} />
       </QueryClientProvider>,
     );
+  });
+  //실패 케이스
+  test('비밀번호와 비밀번호 확인 값이 일치하지 않으면 에러메시지가 표시된다', async () => {
+    //given - 회원가입 페이지가 그려짐
 
     //when - 비밀번호와 비밀번호 확인 값이 일치하지 않음
     const passwordInput = screen.getByLabelText('비밀번호');
