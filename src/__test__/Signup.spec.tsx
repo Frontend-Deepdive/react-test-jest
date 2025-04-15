@@ -43,4 +43,24 @@ describe('회원가입 테스트', () => {
     const errorMessage = await screen.findByTestId('error-message');
     expect(errorMessage).toBeInTheDocument();
   });
+
+  test('이메일을 입력하고, 비밀번호와 비밀번호 확인 값이 일치하면 회원가입 버튼이 활성화 된다.', async () => {
+    //given 회원 가입 페이지가 그려짐
+    const signupButton = screen.getByRole('button', { name: '회원가입' });
+    expect(signupButton).toBeDisabled();
+
+    //when - 이메일 입력, 비밀번호, 비밀번호 확인 일치
+    const emailInput = screen.getByLabelText('이메일');
+    const passwordInput = screen.getByLabelText('비밀번호');
+    const confirmPasswordInput = screen.getByLabelText('비밀번호 확인');
+
+    fireEvent.change(emailInput, {
+      target: { value: 'button-activated@email.com' },
+    });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
+    fireEvent.change(confirmPasswordInput, { target: { value: 'password' } });
+
+    //then - 회원가입 버튼 활성화
+    expect(signupButton).toBeEnabled();
+  });
 });
