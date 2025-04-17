@@ -4,7 +4,8 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import SignupPage from '../pages/SignupPage';
 import '@testing-library/jest-dom';
 import useSignup from '../hooks/useSignup';
-import { SignupFormData, SignupFormElements } from './types/signup.types';
+import { SignupFormData } from './types/signup.types';
+import { fillSignupForm } from './utils/fillSignupForm';
 
 // useSignup 훅 모킹
 jest.mock('../hooks/useSignup');
@@ -12,28 +13,6 @@ jest.mock('../hooks/useSignup');
 describe('SignupPage 컴포넌트', () => {
   let queryClient: QueryClient;
   let mockMutate: jest.Mock<boolean | void, [SignupFormData]>;
-
-  // 입력 필드 채우기
-  const fillSignupForm = (
-    email: string,
-    password: string,
-    confirmPassword: string,
-  ): SignupFormElements => {
-    const emailInput = screen.getByPlaceholderText('이메일을 입력해주세요');
-    const passwordInput = screen.getByPlaceholderText('비밀번호를 입력해주세요');
-    const confirmPasswordInput = screen.getByPlaceholderText('비밀번호를 한 번 더 입력해주세요');
-
-    fireEvent.change(emailInput, { target: { value: email } });
-    fireEvent.change(passwordInput, { target: { value: password } });
-    fireEvent.change(confirmPasswordInput, { target: { value: confirmPassword } });
-
-    return {
-      emailInput,
-      passwordInput,
-      confirmPasswordInput,
-      signupButton: screen.getByRole('button', { name: '회원가입' }),
-    };
-  };
 
   // beforeEach: 테스트마다 모킹 및 렌더링 초기화
   beforeEach(() => {
@@ -62,6 +41,7 @@ describe('SignupPage 컴포넌트', () => {
     );
   });
 
+  // 모든 모킹 해제
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -100,7 +80,11 @@ describe('SignupPage 컴포넌트', () => {
       { timeout: 2000 },
     );
 
-    // 모킹 해제
+    /*
+     * 모킹 해제
+     * - 콘솔 에러는 전역 객체
+     * - 따라서 테스트 간에 영향을 미치지 않도록 해제 필요
+     */
     consoleSpy.mockRestore();
   });
 
