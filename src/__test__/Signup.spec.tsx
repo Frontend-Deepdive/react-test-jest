@@ -1,28 +1,28 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
-import SignupPage from '../pages/SignupPage';
-import '@testing-library/jest-dom'; 
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import SignupPage from "../pages/SignupPage";
+import "@testing-library/jest-dom";
 
-describe('회원가입 테스트', () => {
-  // given : 테스트 실행을 위한 환경 구성 
+describe("회원가입 테스트", () => {
+  // given : 테스트 실행을 위한 환경 구성
   beforeEach(() => {
     const queryClient = new QueryClient();
 
-    // 테스트용 라우터 설정 
+    // 테스트용 라우터 설정
     const routes = [
       {
-        path: '/signup',
+        path: "/signup",
         element: <SignupPage />,
       },
     ];
 
     const router = createMemoryRouter(routes, {
-      initialEntries: ['/signup'], // 초기 진입 경로
+      initialEntries: ["/signup"], // 초기 진입 경로
     });
 
-    // 테스트를 위한 컴포넌트 렌더링 
+    // 테스트를 위한 컴포넌트 렌더링
     render(
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
@@ -30,27 +30,46 @@ describe('회원가입 테스트', () => {
     );
   });
 
-  test('회원가입 페이지가 렌더링된다', () => {
-    const emailInput = screen.getByPlaceholderText('이메일을 입력해주세요');
-    expect(emailInput).toBeInTheDocument(); 
+  test("회원가입 페이지가 렌더링된다", () => {
+    const emailInput = screen.getByPlaceholderText("이메일을 입력해주세요");
+    expect(emailInput).toBeInTheDocument();
   });
 
-  test('비밀번호와 비밀번호 확인이 일치하지 않으면 에러 메시지가 표시된다', () => {
-    // when : 비밀번호와 비밀번호 확인이 다르게 입력되었을 때
-    const passwordInput = screen.getByPlaceholderText('비밀번호를 입력해주세요');
-    const confirmPasswordInput = screen.getByPlaceholderText('비밀번호를 한 번 더 입력해주세요');
+  test("회원가입 페이지 진입 시 회원가입 버튼은 비활성화 상태다", () => {
+    const submitButton = screen.getByRole("button", { name: /회원가입/i });
+    expect(submitButton).toBeDisabled();
+  });
 
-    fireEvent.change(passwordInput, { target: { value: 'password123' } });
-    fireEvent.change(confirmPasswordInput, { target: { value: 'hello' } });
+  test("비밀번호와 비밀번호 확인이 일치하지 않으면 에러 메시지가 표시된다", () => {
+    // when : 비밀번호와 비밀번호 확인이 다르게 입력되었을 때
+    const passwordInput = screen.getByPlaceholderText("비밀번호를 입력해주세요");
+    const confirmPasswordInput = screen.getByPlaceholderText("비밀번호를 한 번 더 입력해주세요");
+
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.change(confirmPasswordInput, { target: { value: "hello" } });
 
     // then : 에러 메시지가 화면에 보여야 한다
-    const errorMessage = screen.getByTestId('error-message');
+    const errorMessage = screen.getByTestId("error-message");
 
     // 디버깅용 콘솔 출력
-    console.log('🚨 에러 메시지:', errorMessage.textContent);
+    console.log("🚨 에러 메시지:", errorMessage.textContent);
 
     expect(errorMessage).toBeInTheDocument();
-    expect(errorMessage).toHaveTextContent('비밀번호가 일치하지 않습니다');
+    expect(errorMessage).toHaveTextContent("비밀번호가 일치하지 않습니다");
+  });
+
+  test("이메일을 입력하고, 비밀번호와 비밀번호 확인이 일치하면 회원가입 버튼이 활성화된다", () => {
+    // when : 이메일을 입력하고, 비밀번호와 비밀번호 확인이 동일하게 입력되었을 때
+    const emailInput = screen.getByPlaceholderText("이메일을 입력해주세요");
+    const passwordInput = screen.getByPlaceholderText("비밀번호를 입력해주세요");
+    const confirmPasswordInput = screen.getByPlaceholderText("비밀번호를 한 번 더 입력해주세요");
+    const submitButton = screen.getByRole("button", { name: /회원가입/i });
+
+    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.change(confirmPasswordInput, { target: { value: "password123" } });
+
+    // then : 회원가입 버튼이 활성화되어야 한다
+    expect(submitButton).toBeEnabled();
   });
 });
-
